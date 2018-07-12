@@ -126,6 +126,10 @@
             'cflags': [ '-fPIE' ],
             'ldflags': [ '-fPIE', '-pie' ]
           }],
+          ['OS == "fuchsia"', {
+            'cflags': [ '-fPIE' ],
+            'ldflags': [ '-fPIE', '-pie' ]
+          }],
           ['node_shared=="true"', {
             'msvs_settings': {
              'VCCLCompilerTool': {
@@ -177,6 +181,10 @@
             'cflags': [ '-fno-omit-frame-pointer' ],
           }],
           ['OS == "android"', {
+            'cflags': [ '-fPIE' ],
+            'ldflags': [ '-fPIE', '-pie' ]
+          }],
+          ['OS == "fuchsia"', {
             'cflags': [ '-fPIE' ],
             'ldflags': [ '-fPIE', '-pie' ]
           }],
@@ -343,7 +351,7 @@
         'cflags': [ '-pthread' ],
         'ldflags': [ '-pthread' ],
       }],
-      [ 'OS in "linux freebsd openbsd solaris android aix cloudabi"', {
+      [ 'OS in "linux freebsd openbsd solaris android aix cloudabi fuchsia"', {
         'cflags': [ '-Wall', '-Wextra', '-Wno-unused-parameter', ],
         'cflags_cc': [ '-fno-rtti', '-fno-exceptions', '-std=gnu++1y' ],
         'ldflags': [ '-rdynamic' ],
@@ -418,6 +426,14 @@
         ],
       }],
       ['OS=="android"', {
+        'target_conditions': [
+          ['_toolset=="target"', {
+            'defines': [ '_GLIBCXX_USE_C99_MATH' ],
+            'libraries': [ '-llog' ],
+          }],
+        ],
+      }],
+      ['OS=="fuchsia"', {
         'target_conditions': [
           ['_toolset=="target"', {
             'defines': [ '_GLIBCXX_USE_C99_MATH' ],

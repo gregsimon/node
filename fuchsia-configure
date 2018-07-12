@@ -10,7 +10,7 @@
 
 
 if [ -z "$2" ]; then
-    ARCH=arm
+    ARCH=x64
 else
     ARCH="$2"
 fi
@@ -28,6 +28,11 @@ case $ARCH in
         TOOLCHAIN_NAME="$ARCH"
         ;;
     x86_64)
+        DEST_CPU="x64"
+        SUFFIX="$ARCH-linux-fuchsia"
+        TOOLCHAIN_NAME="$ARCH"
+        ;;
+    x64)
         DEST_CPU="x64"
         SUFFIX="$ARCH-linux-fuchsia"
         TOOLCHAIN_NAME="$ARCH"
@@ -75,6 +80,7 @@ if [ -f "configure" ]; then
     ./configure \
         --dest-cpu=$DEST_CPU \
         --dest-os=fuchsia \
+        --cross-compiling \
         --without-snapshot \
         --openssl-no-asm
 fi

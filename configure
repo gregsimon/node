@@ -891,6 +891,8 @@ def configure_mips(o):
 def configure_node(o):
   if options.dest_os == 'android':
     o['variables']['OS'] = 'android'
+  if options.dest_os == 'fuchsia':
+    o['variables']['OS'] = 'fuchsia'
   o['variables']['node_prefix'] = options.prefix
   o['variables']['node_install_npm'] = b(not options.without_npm)
   o['default_configuration'] = 'Debug' if options.debug else 'Release'
