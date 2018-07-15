@@ -100,11 +100,13 @@
 typedef int mode_t;
 #else
 #include <pthread.h>
-#include <sys/resource.h>  // getrlimit, setrlimit
+#if !defined(__Fuchsia__)
+  #include <sys/resource.h>  // getrlimit, setrlimit
+#endif // __Fuchsia__
 #include <unistd.h>  // setuid, getuid
 #endif
 
-#if defined(__POSIX__) && !defined(__ANDROID__) && !defined(__CloudABI__)
+#if defined(__POSIX__) && !defined(__ANDROID__) && !defined(__CloudABI__) && !defined(__Fuchsia__)
 #include <pwd.h>  // getpwnam()
 #include <grp.h>  // getgrnam()
 #endif

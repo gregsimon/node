@@ -69,6 +69,7 @@ export AR=ar
 export CC=clang
 export CXX=clang++
 export LINK=clang++
+export FUCHSIA_SDK=$SDK_PATH
 
 GYP_DEFINES="target_arch=$ARCH"
 GYP_DEFINES+=" v8_target_arch=$ARCH"

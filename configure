@@ -893,6 +893,10 @@ def configure_node(o):
     o['variables']['OS'] = 'android'
   if options.dest_os == 'fuchsia':
     o['variables']['OS'] = 'fuchsia'
+    o['cflags'] = ["--sysroot="+os.environ.get('FUCHSIA_SDK')+"/sysroot/x86_64-fuchsia"]
+    o['cflags'] += ["--target=x86_64-fuchsia"]
+    o['cflags'] += ["-D__Fuchsia__"]
+    o['cflags'] += ["-isystem "+os.environ.get('FUCHSIA_SDK')+"sysroot/x86_64-fuchsia/include/c++/v1"]
   o['variables']['node_prefix'] = options.prefix
   o['variables']['node_install_npm'] = b(not options.without_npm)
   o['default_configuration'] = 'Debug' if options.debug else 'Release'
